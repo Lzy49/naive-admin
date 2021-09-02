@@ -1,0 +1,1 @@
+export const PROJECTNAME = 'naive' // 用于 title 展示
