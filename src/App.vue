@@ -1,15 +1,17 @@
 <template>
-  <n-config-provider :theme="theme ? darkTheme : null">
-    <router-view></router-view>
-  </n-config-provider>
+  <n-loading-bar-provider>
+    <n-config-provider
+      :theme-overrides="$store.state.system.theme"
+      :theme="$store.state.system.isDark && darkTheme"
+    >
+      <router-view></router-view>
+    </n-config-provider>
+  </n-loading-bar-provider>
 </template>
 <script setup>
-import { ref, provide } from 'vue';
-import { useOsTheme, darkTheme } from 'naive-ui';
+import { darkTheme, useOsTheme } from 'naive-ui';
+import { useStore } from 'vuex';
+const store = useStore();
 const osThemeRef = useOsTheme();
-const theme = ref(osThemeRef.value === 'dark');
-provide('theme', theme);
-provide('setTheme', (value) => {
-  theme.value = value;
-});
+store.commit('system/setTheme', osThemeRef.value === 'dark');
 </script>

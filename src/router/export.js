@@ -1,5 +1,5 @@
 // 该文件中存放的是 通过 routes 处理出的 提供给组件的 各种对象
-import { ROOTPATH } from './constant';
+import { ROOTPATH, GUARDPATHS, ADMINPATHS } from './constant';
 import adminRoutes from './routes/admin';
 // 拼装 所有节点 和 所有关系
 const flatRoutes = (routes, parent = null) => {
@@ -56,5 +56,9 @@ const getParentList = (item) => {
 // 通过 路由 找 面包屑
 export const pathToBreadcrumb = (path) => {
   const item = nodes.find(({ value }) => value === path);
-  return getParentList(item)
+  return getParentList(item);
 };
+export const isGuardRouter = (path) =>
+  GUARDPATHS.find((item) => path.search(item) === 0);
+export const isAdminRouter = (path) =>
+  ADMINPATHS.find((item) => path.search(item) === 0);

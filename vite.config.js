@@ -11,6 +11,7 @@ export default defineConfig({
     alias: {
       '@': resolve('src'),
       '@css':resolve('src/assets/css'),
+      '@img':resolve('src/assets/img')
     }
   }
 });

@@ -26,12 +26,17 @@
         />
       </n-auto-complete>
       <!-- 色彩模式 -->
-      <n-icon size="20" @click="() => setTheme(!theme)">
-        <Sunny v-if="theme" />
-        <Moon v-if="!theme" />
+      <n-icon size="20" @click="() => $store.commit('system/setTheme')">
+        <Sunny v-if="$store.state.system.isDark" />
+        <Moon v-if="!$store.state.system.isDark" />
       </n-icon>
       <!-- 未读消息 -->
-      <n-icon size="20"><ClipboardOutline /></n-icon>
+      <n-badge :value="msgCount" align="center">
+        <n-icon size="20" :color="$store.state.system.fontColor"
+          ><ClipboardOutline
+        /></n-icon>
+      </n-badge>
+
       <!-- 头像以及用户菜单 -->
       <n-dropdown
         size="small"
@@ -39,7 +44,7 @@
         placement="bottom-end"
         :options="userOptions"
         :show-arrow="true"
-        @select="$router.push"
+        @select="menuhander"
       >
         <n-avatar
           round
@@ -54,11 +59,10 @@
 <script setup>
 import { searchNode } from '@/router/export.js';
 import { Search, Moon, Sunny, ClipboardOutline } from '@vicons/ionicons5';
-import { inject, ref, computed, nextTick } from 'vue';
+import { ref, computed, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
+import storage from '@/utils/storage.js';
 const router = useRouter();
-const theme = inject('theme');
-const setTheme = inject('setTheme');
 // 搜索框相关
 const inputInstRef = ref(null);
 const searchShow = ref(false);
@@ -75,13 +79,28 @@ const handerSearch = async () => {
   await nextTick();
   inputInstRef.value.focus();
 };
+// 消息相关
+const msgCount = ref(10);
+setTimeout(() => {
+  msgCount.value = 0;
+}, 1000);
 // 用户相关
 const userOptions = [
   {
     label: '用户中心',
     key: '/admin/user'
+  },
+  {
+    label: '退出',
+    key: 'logout'
   }
 ];
+const menuhander = (key) => {
+  if (key === 'logout') {
+    storage.local.remove('token');
+    router.replace('/login');
+  }
+};
 </script>
 
 <style lang="scss">

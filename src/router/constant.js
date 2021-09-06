@@ -1,2 +1,3 @@
-export { default } from '@/layouts/parentLayout.vue';
-export const ROOTPATH = '/admin'
+export const ROOTPATH = '/admin';
+export const GUARDPATHS = ['/admin'];
+export const ADMINPATHS = ['/admin']

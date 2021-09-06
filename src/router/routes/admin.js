@@ -49,39 +49,34 @@ export default [
     ]
   },
   {
-    path: 'news',
+    path: 'component',
     meta: {
-      title: '新闻中心',
+      title: '组件',
       icon: renderIcon(BookIcon)
     },
     component,
-    redirect: `${ROOTPATH}/news/list`,
+    redirect: `${ROOTPATH}/component/listPage`,
     children: [
       {
-        path: 'list',
-        component: () => import('@/pages/news/list.vue'),
+        path: 'listPage',
+        component: () => import('@/pages/component/list.vue'),
         meta: {
-          title: '新闻列表'
-        },
-        noNav
+          title: '列表页'
+        }
       },
-
       {
-        path: 'add',
-        component: () => import('@/pages/news/config.vue'),
+        path: 'detalPage',
+        component: () => import('@/pages/component/detal.vue'),
         meta: {
-          title: '添加新闻'
-        },
-        noNav
+          title: '详情页'
+        }
       },
-
       {
-        path: 'alert',
-        component: () => import('@/pages/news/config.vue'),
+        path: 'configPage',
+        component: () => import('@/pages/component/config.vue'),
         meta: {
-          title: '编辑新闻'
-        },
-        noNav
+          title: '编辑页'
+        }
       }
     ]
   }

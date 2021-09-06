@@ -21,15 +21,8 @@ import { navLink } from '@/router/export.js';
 import { ref, h, watch, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
 import { NEllipsis } from 'naive-ui';
-import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 const store = useStore();
-const inverted = ref(false);
-onMounted(() => {
-  setTimeout(() => {
-    console.log(store.state.system.navValue);
-  }, 1000);
-});
 const renderMenuLabel = (option) => {
   return h(NEllipsis, null, {
     default: () =>
