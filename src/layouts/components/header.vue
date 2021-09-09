@@ -52,11 +52,14 @@
           src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
         />
       </n-dropdown>
+      <Test></Test>
       <!-- end -->
     </div>
+
   </n-layout-header>
 </template>
 <script setup>
+import Test from '@/test.jsx';
 import { searchNode } from '@/router/export.js';
 import { Search, Moon, Sunny, ClipboardOutline } from '@vicons/ionicons5';
 import { ref, computed, nextTick } from 'vue';

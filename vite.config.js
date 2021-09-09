@@ -1,17 +1,25 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import { resolve } from 'path';
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  base: 'https://cdn.max-digital.cn/H5/test/naive-ui/',
+  plugins: [
+    vue({
+      script: {
+        refSugar: true
+      }
+    }),
+    vueJsx({})
+  ],
   server: {
     open: true
   },
   resolve: {
     alias: {
-      '@': resolve('src'),
-      '@css':resolve('src/assets/css'),
-      '@img':resolve('src/assets/img')
+      '@': resolve('./src'),
+      '@css': resolve('./src/assets/css'),
+      '@img': resolve('./src/assets/img')
     }
-  }
+  },
 });
