@@ -375,6 +375,11 @@
   dependencies:
     "@types/yargs-parser" "*"
 
+"@vicons/antd@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.nlark.com/@vicons/antd/download/@vicons/antd-0.11.0.tgz#3d28952d028aed712dca61cb81dbdb11454c5542"
+  integrity sha1-PSiVLQKK7XEtymHLgdvbEUVMVUI=
+
 "@vicons/ionicons5@^0.11.0":
   version "0.11.0"
   resolved "https://registry.nlark.com/@vicons/ionicons5/download/@vicons/ionicons5-0.11.0.tgz#54185bfa572a09df70094db1954f28bfbf1363ed"
@@ -619,6 +624,11 @@ chalk@^4.0.0:
     readdirp "~3.6.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+clipboard-polyfill@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.npm.taobao.org/clipboard-polyfill/download/clipboard-polyfill-3.0.3.tgz#159ea0768e20edc7ffda404bd13c54c73de4ff40"
+  integrity sha1-FZ6gdo4g7cf/2kBL0TxUxz3k/0A=
 
 color-convert@^1.9.0:
   version "1.9.3"

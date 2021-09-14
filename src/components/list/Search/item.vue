@@ -1,5 +1,5 @@
 <template>
-  <n-gi id="c-search-item" :span="span">
+  <n-gi class="search-item" :span="span">
     <n-form-item label-placement="left" :path="props.path" :label="props.label">
       <slot></slot>
     </n-form-item>
@@ -19,8 +19,3 @@ export default {
   props: ['span']
 };
 </script>
-<style>
-#c-search-item {
-  padding-right: 15px;
-}
-</style>

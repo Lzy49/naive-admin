@@ -8,7 +8,6 @@
   </n-layout>
 </template>
 <script>
-console.log('404');
 </script>
 <style lang="scss">
 .exception-404 {

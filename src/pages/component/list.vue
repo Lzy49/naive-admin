@@ -1,5 +1,5 @@
 <template>
-  <cTable
+  <cList
     v-model:search-data="search.data"
     :search-rules="search.rules"
     :table-data="data"
@@ -35,12 +35,12 @@
         <n-icon><CloudDownload /></n-icon>&nbsp; 下载
       </n-Button>
     </template>
-  </cTable>
+  </cList>
 </template>
 <script setup>
 import { ArrowForwardCircle, CloudDownload } from '@vicons/ionicons5';
 import { ref, reactive, h } from 'vue';
-import { cTable, cSearchItem } from '@/components/table/base.js';
+import { cList, cSearchItem } from '@/components/list/base.js';
 import { NButton, useMessage } from 'naive-ui';
 import { useRouter } from 'vue-router';
 import { NAnchor } from 'naive-ui';
@@ -66,66 +66,105 @@ const data = [
   {
     pic: 'https://himg.bdimg.com/sys/portraitn/item/public.1.d6a9bc67.ndcCG_2rCjUUVVToEqBRCA',
     name: '张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞',
-    url: 'https://www.baidu.com',
-    state: true,
-    tag: ['标签1', '标签2', '标签3'],
+    url: 'https://image.baidu.com/search/index?tn=baiduimage&ct=201326592&lm=-1&cl=2&ie=gb18030&word=%B9%F8%B0%FC%C8%E2&fr=ala&ala=1&alatpl=normal&pos=0',
+    state: 0,
+    tag: [
+      '标签1',
+      '标签2',
+      '标签3',
+      '标签1',
+      '标签2',
+      '标签3',
+      '标签1',
+      '标签2',
+      '标签3',
+      '标签1',
+      '标签2',
+      '标签3',
+      '标签1',
+      '标签2',
+      '标签3',
+      '标签1',
+      '标签2',
+      '标签3'
+    ],
     other: '其他信息',
     address: '中国 上海 人民广场',
     sex: '男'
   }
 ];
 const columns = [
-  {
-    type: 'selection',
-    fixed: 'left'
-  },
+  // {
+  //   type: 'selection',
+  //   fixed: 'left'
+    
+  // },
   {
     title: '微信头像',
     type: 'img',
-    align:'center',
+    align: 'center',
     key: 'pic'
   },
   {
     title: '姓名',
     key: 'name',
     type: 'ellipsis',
+    align: 'center',
     width: 100
   },
   {
     title: '个人网站',
+    align: 'center',
     key: 'url',
     type: 'link'
   },
   {
     title: '在职状态',
     key: 'state',
-    type: 'state'
+    align: 'center',
+    type: 'state',
+    options: [
+      {
+        text: '未知',
+        color: 'gray'
+      },
+      {
+        text: '在职',
+        color: 'green'
+      },
+      {
+        text: '离职',
+        color: 'red'
+      }
+    ]
   },
   {
     title: '标签',
     key: 'tag',
+    align: 'center',
+    width: '200px',
     type: 'tag'
   },
   {
     title: '其他',
     key: 'other',
+    align: 'center',
     type: 'description',
-    options: {
-      data: [
-        {
-          title: '地址',
-          key: 'address'
-        },
-        {
-          title: '性别',
-          key: 'sex'
-        }
-      ]
-    }
+    options: [
+      {
+        title: '地址',
+        key: 'address'
+      },
+      {
+        title: '性别',
+        key: 'sex'
+      }
+    ]
   },
   {
     title: '操作',
     type: 'bts',
+    align: 'center',
     options: [
       {
         title: '删除',
@@ -136,7 +175,7 @@ const columns = [
       },
       {
         title: '编辑',
-        type: 'error',
+        type: 'primary',
         hander(raw) {
           router.push('configPage');
         }

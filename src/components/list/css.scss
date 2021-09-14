@@ -1,0 +1,76 @@
+// c-list 组件的 样式
+#c-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+// 搜索模块样式
+#c-list .search-box {
+  .bts {
+    padding-bottom: 24px;
+  }
+
+  .collapsed-bt {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+}
+
+// 搜索 项 模块
+#c-list .search-item {
+  padding-right: 15px;
+}
+
+// 搜索外的模块样式
+#c-list .other-box {
+  padding-bottom: 24px;
+
+  .bt {
+    margin-right: 10px;
+  }
+}
+
+// 表格模块
+#c-list .table-box {
+  flex: 1;
+
+  .table-ellipsis {
+    width: 100%;
+  }
+
+  .table-link {
+    width: 100%;
+    background: #fff;
+    vertical-align: middle;
+    color: var(--arrow-color);
+  }
+
+  .table-tags {
+    color: var(--th-text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    .item {
+      display: inline-block;
+      margin: 0 3px;
+      border: 1px solid var(--th-text-color);
+      padding: 0 4px;
+      border-radius: 2px;
+      font-size: var(--font-size);
+      color: var(--th-text-color)
+    }
+  }
+
+  .table-state {
+    i {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: gray;
+      border-radius: 50%;
+      margin-right: 5px
+    }
+  }
+}

@@ -18,9 +18,7 @@ class Storage {
       });
       return;
     }
-    console.log('吃点什么', value);
     hash && (value = md5(value));
-    console.log('喝点', JSON.stringify(value));
     window[this.type].setItem(key + 'deadline', deadline || 10 ** 20);
     window[this.type].setItem(key, JSON.stringify(value));
   }
@@ -33,7 +31,6 @@ class Storage {
     return JSON.parse(window[this.type].getItem(key));
   }
   remove(key) {
-    console.log(key)
     window[this.type].removeItem(key);
     window[this.type].removeItem(key + 'deadline');
   }

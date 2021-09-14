@@ -13,6 +13,5 @@
 import { onMounted } from 'vue';
 import { useStore } from 'vuex';
 const store = useStore();
-// store.system.breadcrumb();
-// console.log(exportBreadcrumb());
+
 </script>
