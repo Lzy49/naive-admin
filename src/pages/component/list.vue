@@ -1,13 +1,12 @@
 <template>
   <cList
     v-model:search-data="search.data"
+    @on-search="getData"
     :search-rules="search.rules"
     :table-data="data"
     :table-columns="columns"
     :table-pages="{}"
-    :tableOptions="{
-      // scrollX: 1800
-    }"
+    :tableOptions="{}"
   >
     <template #search>
       <cSearchItem span="2" label="日期" path="date">
@@ -97,7 +96,7 @@ const columns = [
   // {
   //   type: 'selection',
   //   fixed: 'left'
-    
+
   // },
   {
     title: '微信头像',
@@ -183,4 +182,14 @@ const columns = [
     ]
   }
 ];
+function getData() {
+  fetch('/api/getUsers')
+    .then((response) => {
+      console.log(response)
+      response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    });
+}
 </script>

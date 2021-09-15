@@ -4,6 +4,7 @@
       :search-data="props.searchData"
       :search-rules="props.searchRules"
       @reset="(props) => $emit('update:searchData', props)"
+      @on-search="()=>$emit('on-search')"
     >
       <template #search>
         <slot name="search"></slot>

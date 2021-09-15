@@ -47,21 +47,22 @@ const props = defineProps({
   searchData: Object,
   searchRules: Object
 });
+
+const $emit = defineEmits(['reset', 'on-search']);
 // 点击确定后验证数据
 const formRef = ref(null);
 const message = useMessage();
 const onSearch = () => {
   formRef.value.validate((errors) => {
     if (!errors) {
-      message.success('验证成功');
+      $emit('on-search');
     } else {
-      message.error('验证失败');
+      message.error('请按要求填写搜索项');
     }
   });
 };
 /* 重置数据 */
 // 原始数据
-const $emit = defineEmits(['reset']);
 const data = copy(props.searchData);
 const onReset = () => {
   // 重置数据
@@ -89,6 +90,6 @@ onMounted(() => {
 </script>
 <script>
 export default {
-  name:'Search'
-}
+  name: 'Search'
+};
 </script>
