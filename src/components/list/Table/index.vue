@@ -1,5 +1,6 @@
 <template>
   <div class="table-box">
+    
     <n-data-table
       size="small"
       :columns="columns"
@@ -10,7 +11,7 @@
         ...defaultPagination,
         ...props.page
       }"
-      v-bind="props.tableOptions"
+      v-bind="props.options"
     >
     </n-data-table>
   </div>
@@ -22,13 +23,13 @@ import handleColumns from './handleColumns.js';
 const props = defineProps({
   data: Array,
   columns: Array,
-  pages: Object
+  pages: Object,
+  options: Object
 });
-const pagination = reactive({ pageSize: 10 });
 const columns = handleColumns(props.columns);
 </script>
 <script>
 export default {
-  name:'Table'
-}
+  name: 'Table'
+};
 </script>
