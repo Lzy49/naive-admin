@@ -2,7 +2,6 @@
   <div class="table-box">
     
     <n-data-table
-      size="small"
       :columns="columns"
       :data="props.data"
       style="height: 100%"

@@ -141,7 +141,7 @@ export const TableTags = defineComponent({
   props: {
     value: [Array, Object],
     options: Object,
-    width: String
+    width: [String,Number]
   },
   render() {
     const children = [];

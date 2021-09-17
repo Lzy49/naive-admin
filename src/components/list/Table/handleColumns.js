@@ -13,6 +13,7 @@ import {
 function handler({ type, key, options = {}, width = 100, ...ags }) {
   return {
     width,
+    key,
     ...ags,
     render(data) {
       switch (type) {
