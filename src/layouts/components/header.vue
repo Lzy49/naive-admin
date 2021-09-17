@@ -99,6 +99,8 @@ const menuhander = (key) => {
   if (key === 'logout') {
     storage.local.remove('token');
     router.replace('/login');
+  } else {
+    router.replace('/admin/user');
   }
 };
 </script>

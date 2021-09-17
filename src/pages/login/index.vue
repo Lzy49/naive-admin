@@ -44,6 +44,7 @@
   </n-layout>
 </template>
 <script setup>
+import { login } from '@api/login';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import storage from '@/utils/storage.js';
@@ -69,10 +70,14 @@ const rules = {
 const update = () => {
   formRef.value.validate((errors) => {
     if (!errors) {
-      if (form.username === 'admin' && form.password === '123456') {
-        storage.local.set('token', form.username + form.password, null, true);
-        router.replace('/admin');
-      }
+      login(form)
+        .then((res) => {
+          storage.local.set('token', res.token);
+          router.replace('/admin');
+        })
+        .catch(({ message }) => {
+          console.log(message);
+        });
     }
   });
 };

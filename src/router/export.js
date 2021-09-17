@@ -13,9 +13,10 @@ const flatRoutes = (routes, parent = null) => {
       noNav, // 该路由不现实在侧边导航
       parent
     };
-    nodes.push(item);
     item.key = item.value;
-    return { ...item, children: children && flatRoutes(children, item) };
+    item.children = children && flatRoutes(children, item);
+    nodes.push(item);
+    return item;
   });
 };
 // 筛选 noNav !== true 的节点

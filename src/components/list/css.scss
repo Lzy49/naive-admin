@@ -34,11 +34,10 @@
 // 表格模块
 #c-list .table-box {
   flex: 1;
-
+  display: block;
   .table-ellipsis {
     width: 100%;
   }
-
   .table-link {
     width: 100%;
     background: #fff;

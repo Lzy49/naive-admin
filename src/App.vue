@@ -7,12 +7,15 @@
         :locale="zhCN"
         :date-locale="dateZhCN"
       >
-        <router-view></router-view>
+        <warp>
+          <router-view></router-view>
+        </warp>
       </n-config-provider>
     </n-message-provider>
   </n-loading-bar-provider>
 </template>
 <script setup>
+import Warp from '@/layouts/warp.vue';
 import { darkTheme, useOsTheme, zhCN, dateZhCN } from 'naive-ui';
 import { useStore } from 'vuex';
 const store = useStore();

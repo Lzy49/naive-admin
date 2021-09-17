@@ -17,6 +17,7 @@
       :data="props.tableData"
       :columns="props.tableColumns"
       :pages="props.tablePages"
+      :options="props.tableOptions"
     >
     </cTable>
   </div>

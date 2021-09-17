@@ -6,7 +6,9 @@
     :table-data="data"
     :table-columns="columns"
     :table-pages="{}"
-    :tableOptions="{}"
+    :table-options="{
+      'scroll-x': 1800
+    }"
   >
     <template #search>
       <cSearchItem span="2" label="日期" path="date">
@@ -35,15 +37,12 @@
       </n-Button>
     </template>
   </cList>
-</template>
+</template> 
 <script setup>
 import { ArrowForwardCircle, CloudDownload } from '@vicons/ionicons5';
-import { ref, reactive, h } from 'vue';
+import { reactive } from 'vue';
 import { cList, cSearchItem } from '@/components/list/base.js';
-import { NButton, useMessage } from 'naive-ui';
 import { useRouter } from 'vue-router';
-import { NAnchor } from 'naive-ui';
-const gridItemCount = ref(10);
 const router = useRouter();
 const search = reactive({
   data: {
@@ -60,9 +59,9 @@ const search = reactive({
     }
   }
 });
-const message = useMessage();
 const data = [
   {
+    key: 10,
     pic: 'https://himg.bdimg.com/sys/portraitn/item/public.1.d6a9bc67.ndcCG_2rCjUUVVToEqBRCA',
     name: '张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞张飞',
     url: 'https://image.baidu.com/search/index?tn=baiduimage&ct=201326592&lm=-1&cl=2&ie=gb18030&word=%B9%F8%B0%FC%C8%E2&fr=ala&ala=1&alatpl=normal&pos=0',
@@ -96,20 +95,21 @@ const columns = [
   // {
   //   type: 'selection',
   //   fixed: 'left'
-
   // },
   {
     title: '微信头像',
     type: 'img',
     align: 'center',
+    fixed: 'left',
+    width:30,
     key: 'pic'
   },
   {
     title: '姓名',
     key: 'name',
     type: 'ellipsis',
-    align: 'center',
-    width: 100
+    fixed: 'left',
+    align: 'center'
   },
   {
     title: '个人网站',
@@ -141,7 +141,6 @@ const columns = [
     title: '标签',
     key: 'tag',
     align: 'center',
-    width: '200px',
     type: 'tag'
   },
   {
@@ -169,7 +168,7 @@ const columns = [
         title: '删除',
         type: 'error',
         hander(raw) {
-          message.info(`删除${raw.name}成功`);
+          window.$message.info(`删除${raw.name}成功`);
         }
       },
       {
@@ -185,7 +184,7 @@ const columns = [
 function getData() {
   fetch('/api/getUsers')
     .then((response) => {
-      console.log(response)
+      console.log(response);
       response.json();
     })
     .then((data) => {

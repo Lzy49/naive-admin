@@ -22,14 +22,23 @@ export default ({ command }) => {
       })
     ],
     server: {
-      open: true
+      open: true,
+      proxy: {
+        // '/api': {
+        //   target: 'http://rap2api.taobao.org/',
+        //   changeOrigin: true,
+        //   rewrite: (path) => {
+        //     return path.replace(/^\/api/, '');
+        //   }
+        // }
+      }
     },
     resolve: {
       alias: {
         '@': resolve('./src'),
         '@css': resolve('./src/assets/css'),
         '@img': resolve('./src/assets/img'),
-        '@mock': resolve('./mock')
+        '@api': resolve('./src/utils/request/api')
       }
     }
   });

@@ -1,10 +1,8 @@
 import { writeText } from 'clipboard-polyfill/text';
-import { useMessage } from 'naive-ui';
 export default (value) =>
   writeText(value).then(
     (res) => {
-      const message = useMessage();
-      message.success('copy 成功');
+      window.$message.success('copy 成功');
     },
     (res) => {
       const message = useMessage();
