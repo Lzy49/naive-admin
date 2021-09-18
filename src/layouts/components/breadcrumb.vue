@@ -1,5 +1,5 @@
 <template>
-  <n-breadcrumb style="margin: var(--appPadding)">
+  <n-breadcrumb style="padding: var(--appPadding)">
     <n-breadcrumb-item v-for="item of $store.state.system.breadcrumb">
       <n-dropdown
         v-if="item.children"

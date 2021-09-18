@@ -10,7 +10,7 @@ import {
   TableOther,
   TableBts
 } from './items';
-function handler({ type, key, options = {}, width = 100, ...ags }) {
+function handler({ type, key, options = {}, width, ...ags }) {
   return {
     width,
     key,

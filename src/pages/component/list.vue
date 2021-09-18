@@ -7,7 +7,7 @@
     :table-columns="columns"
     :table-pages="{}"
     :table-options="{
-      'scroll-x': 1800
+      'scroll-x': 3000
     }"
   >
     <template #search>
@@ -37,12 +37,15 @@
       </n-Button>
     </template>
   </cList>
-</template> 
+</template>
 <script setup>
+import TableImage from '@/components/image.jsx';
+import { TableEllipsis } from '@/components/list/Table/items.js';
 import { ArrowForwardCircle, CloudDownload } from '@vicons/ionicons5';
-import { reactive } from 'vue';
+import { reactive, h } from 'vue';
 import { cList, cSearchItem } from '@/components/list/base.js';
 import { useRouter } from 'vue-router';
+import { NEllipsis } from 'naive-ui';
 const router = useRouter();
 const search = reactive({
   data: {
@@ -92,36 +95,39 @@ const data = [
   }
 ];
 const columns = [
-  // {
-  //   type: 'selection',
-  //   fixed: 'left'
-  // },
+  {
+    type: 'selection',
+    width: 10,
+    fixed: 'left'
+  },
   {
     title: '微信头像',
     type: 'img',
     align: 'center',
-    fixed: 'left',
-    width:30,
-    key: 'pic'
+    width: 100,
+    key: 'pic',
+    fixed: 'left'
   },
   {
     title: '姓名',
     key: 'name',
     type: 'ellipsis',
-    fixed: 'left',
-    align: 'center'
+    align: 'center',
+    width: 100
   },
   {
     title: '个人网站',
     align: 'center',
     key: 'url',
-    type: 'link'
+    type: 'link',
+    width: 100
   },
   {
     title: '在职状态',
     key: 'state',
     align: 'center',
     type: 'state',
+    width: 100,
     options: [
       {
         text: '未知',
@@ -163,6 +169,8 @@ const columns = [
     title: '操作',
     type: 'bts',
     align: 'center',
+    fixed: 'right',
+    width: 150,
     options: [
       {
         title: '删除',

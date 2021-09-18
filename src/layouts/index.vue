@@ -7,9 +7,9 @@
         <app-breadcrumb></app-breadcrumb>
         <n-layout-content
           position="absolute"
-          style="top: 22px; margin-top: var(--appPadding)"
-          content-style="padding: var(--appPadding); height:100%"
-          :native-scrollbar="false"
+          style="top: 36px; margin-top: var(--appPadding)"
+          content-style="padding: 0 var(--appPadding) var(--appPadding) var(--appPadding); height:100%"
+          :native-scrollbar="true"
         >
           <router-view></router-view>
         </n-layout-content>

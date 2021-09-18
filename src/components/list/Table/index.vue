@@ -1,6 +1,5 @@
 <template>
   <div class="table-box">
-    
     <n-data-table
       :columns="columns"
       :data="props.data"
@@ -16,7 +15,6 @@
   </div>
 </template>
 <script setup>
-import { reactive } from 'vue';
 import { defaultPagination } from './default.js';
 import handleColumns from './handleColumns.js';
 const props = defineProps({
