@@ -1,2 +1,2 @@
-export { default as Item } from './components/detailItem.vue';
-export { default as Group } from './components/detailGroup.vue';
+export { default as DetailItem } from './components/Item.vue';
+export { default as Detail } from './components/Group.vue';

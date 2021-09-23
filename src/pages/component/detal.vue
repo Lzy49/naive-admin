@@ -1,5 +1,5 @@
 <template>
-  <Group
+  <Detail
     title="详情"
     subtitle="详情副标题详情副标题详情副标题详情副标题详情副标题详情副标题详情副标题详情副标题"
     :loading="loading"
@@ -101,12 +101,12 @@
         />
       </n-timeline>
     </Item>
-  </Group>
+  </Detail>
 </template>
 <script setup>
 import { h } from 'vue';
 import { NTag, NButton } from 'naive-ui';
-import { Item, Group } from '@/components/detail';
+import { DetailItem as Item, Detail } from '@/components/detail';
 import { ref, reactive } from 'vue';
 const loading = ref(true);
 const loading3 = ref(true);

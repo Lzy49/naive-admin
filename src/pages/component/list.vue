@@ -1,51 +1,51 @@
 <template>
-  <cList
-    v-model:search-data="search.data"
-    @on-search="getData"
-    :search-rules="search.rules"
-    :table-data="data"
-    :table-columns="columns"
-    :table-pages="{}"
-    :table-options="{
-      'scroll-x': 3000
-    }"
-  >
-    <template #search>
-      <cSearchItem span="2" label="日期" path="date">
+  <div class="my-list-wrap">
+    <Search
+      rows="1"
+      v-model="search.data"
+      :rules="search.rules"
+      @on-search="getData"
+    >
+      <SearchItem span="2" label="日期" path="date">
         <n-date-picker
           style="width: 100%"
           type="datetimerange"
           v-model:value="search.data.date"
         />
-      </cSearchItem>
-      <cSearchItem span="1" label="姓名" path="name">
+      </SearchItem>
+      <SearchItem span="1" label="姓名" path="name">
         <n-Input v-model:value="search.data.name">12</n-Input>
-      </cSearchItem>
-      <cSearchItem span="1" label="手机号" path="phone">
+      </SearchItem>
+      <SearchItem span="1" label="手机号" path="phone">
         <n-Input v-model:value="search.data.phone">12</n-Input>
-      </cSearchItem>
-      <cSearchItem span="1" label="年纪" path="age">
+      </SearchItem>
+      <SearchItem span="1" label="年纪" path="age">
         <n-Input v-model:value="search.data.age">12</n-Input>
-      </cSearchItem>
-    </template>
-    <template #other>
+      </SearchItem>
+    </Search>
+    <div class="order-bt">
       <n-Button round class="bt">
         <n-icon><ArrowForwardCircle /></n-icon>&nbsp; 去其他页面
       </n-Button>
       <n-Button round class="bt">
         <n-icon><CloudDownload /></n-icon>&nbsp; 下载
       </n-Button>
-    </template>
-  </cList>
+    </div>
+    <Table
+      :data="data"
+      :columns="columns"
+      :pagination="{}"
+      :scroll-x="1500"
+      @update:checked-row-keys="handleCheck"
+    ></Table>
+  </div>
 </template>
 <script setup>
-import TableImage from '@/components/image.jsx';
-import { TableEllipsis } from '@/components/list/Table/items.js';
+import { Search, SearchItem } from '@/components/search/index.js';
+import Table from '@/components/table/index.vue';
 import { ArrowForwardCircle, CloudDownload } from '@vicons/ionicons5';
-import { reactive, h } from 'vue';
-import { cList, cSearchItem } from '@/components/list/base.js';
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import { NEllipsis } from 'naive-ui';
 const router = useRouter();
 const search = reactive({
   data: {
@@ -120,7 +120,7 @@ const columns = [
     align: 'center',
     key: 'url',
     type: 'link',
-    width: 100
+    width: 150
   },
   {
     title: '在职状态',
@@ -154,6 +154,7 @@ const columns = [
     key: 'other',
     align: 'center',
     type: 'description',
+    width: 100,
     options: [
       {
         title: '地址',
@@ -199,4 +200,8 @@ function getData() {
       console.log(data);
     });
 }
+function handleCheck(value) {
+  console.log(value);
+}
 </script>
+<style lang="scss"></style>

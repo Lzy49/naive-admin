@@ -5,7 +5,6 @@ import { viteMockServe } from 'vite-plugin-mock';
 import { resolve } from 'path';
 export default ({ command }) => {
   return defineConfig({
-    // base: 'https://cdn.max-digital.cn/H5/test/naive-ui/',
     plugins: [
       vue({
         script: {

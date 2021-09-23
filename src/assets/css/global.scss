@@ -1,0 +1,14 @@
+// 列表样式
+.my-list-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .order-bt {
+    padding-bottom: 24px;
+
+    .bt {
+      margin-right: 5px;
+    }
+  }
+}

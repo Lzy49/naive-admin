@@ -73,6 +73,5 @@ export default (columns) => {
     }
     return handler(item);
   });
-  console.log(newColumns);
   return newColumns;
 };

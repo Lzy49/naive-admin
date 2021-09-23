@@ -1,8 +1,8 @@
 <template>
   <n-form
-    class="search-box"
-    :model="props.searchData"
-    :rules="props.searchRules"
+    id="my-search-box"
+    :model="props.data"
+    :rules="props.rule"
     ref="formRef"
   >
     <n-grid
@@ -12,7 +12,7 @@
       responsive="screen"
       ref="wrap"
     >
-      <slot name="search"></slot>
+      <slot></slot>
       <n-gi :suffix="gridCollapsed" class="bts">
         <n-space align="center">
           <n-Button @click="onSearch" type="primary">搜索</n-Button>
@@ -44,11 +44,11 @@ const props = defineProps({
     type: Number,
     default: 1
   },
-  searchData: Object,
-  searchRules: Object
+  modelValue: Object,
+  rule: Object
 });
 
-const $emit = defineEmits(['reset', 'on-search']);
+const $emit = defineEmits(['on-search', 'update:modelValue']);
 // 点击确定后验证数据
 const formRef = ref(null);
 const message = useMessage();
@@ -63,10 +63,11 @@ const onSearch = () => {
 };
 /* 重置数据 */
 // 原始数据
-const data = copy(props.searchData);
+const data = copy(props.modelValue);
 const onReset = () => {
   // 重置数据
-  $emit('reset', copy(data));
+  $emit('update:modelValue', copy(data));
+  formRef.value.restoreValidation();
 };
 /*收缩 搜索项*/
 const gridCollapsed = ref(false);
@@ -76,9 +77,7 @@ const showHidden = ref(false);
 // 通过 slot 统计 子 item 的 span 值 将来与父级对照
 const setShowHidden = () => {
   const itemCount =
-    slot
-      .search()[0]
-      .children.reduce((count, item) => +count + +item.props.span, 0) + 1;
+    slot.default().reduce((count, item) => +count + +item.props.span, 0) + 1;
   watchEffect(() => {
     // 监听 n-grid  的  responsiveCols 值（会根据窗口大小变化）更改 showHidden
     showHidden.value = wrap.value.responsiveCols * props.rows < itemCount;
@@ -93,3 +92,15 @@ export default {
   name: 'Search'
 };
 </script>
+<style lang="scss">
+// 搜索模块样式
+#my-search-box {
+  .bts {
+    padding-bottom: 24px;
+  }
+  .collapsed-bt {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+}
+</style>
