@@ -18,7 +18,13 @@
 import Warp from '@/layouts/warp.vue';
 import { darkTheme, useOsTheme, zhCN, dateZhCN } from 'naive-ui';
 import { useStore } from 'vuex';
+import storage from '@/utils/storage.js';
+// 在这里取一下用户喜好的
 const store = useStore();
-const osThemeRef = useOsTheme();
-store.commit('system/setTheme', osThemeRef.value === 'dark');
+if (storage.local.get('theme') === undefined) {
+  const osThemeRef = useOsTheme();
+  store.commit('system/setTheme', osThemeRef.value === 'dark');
+} else {
+  store.commit('system/setTheme', storage.local.get('theme'));
+}
 </script>

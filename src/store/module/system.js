@@ -1,4 +1,5 @@
 import { pathToCanNavPath, pathToBreadcrumb } from '@/router/export';
+import storage from '@/utils/storage';
 export default {
   namespaced: true,
   state: {
@@ -25,6 +26,7 @@ export default {
     },
     setTheme(state, isDark = !state.isDark) {
       state.isDark = isDark;
+      storage.local.set('theme', isDark);
     }
   }
 };

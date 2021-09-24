@@ -11,18 +11,17 @@
       :collapsed-icon-size="22"
       :options="navLink"
       :render-label="renderMenuLabel"
-      :default-value="store.state.system.navValue"
+      :default-value="$store.state.system.navValue"
+      :value="$store.state.system.navValue"
     />
   </n-layout-sider>
 </template>
 
 <script setup>
 import { navLink } from '@/router/export.js';
-import { ref, h, watch, onMounted } from 'vue';
+import { h } from 'vue';
 import { RouterLink } from 'vue-router';
 import { NEllipsis } from 'naive-ui';
-import { useStore } from 'vuex';
-const store = useStore();
 const renderMenuLabel = (option) => {
   return h(NEllipsis, null, {
     default: () =>
