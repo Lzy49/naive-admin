@@ -101,39 +101,55 @@ export const TableLink = defineComponent({
     );
   }
 });
+
 export const TableState = defineComponent({
   props: {
-    options: {
+    state: {
       type: [Object, Array],
       validator(value) {
         for (const key in value) {
-          const { text, color } = value[key];
-          !text || (!color && console.error(new Error(`必须有 text 和 color`)));
+          const { text } = value[key];
+          !text && console.error(new Error(`必须有 text `));
         }
         return true;
       }
     },
+    style: {
+      validator(value) {
+        // 这个值必须匹配下列字符串中的一个
+        return ['circle', 'none'].includes(value);
+      },
+      default: 'none'
+    },
     value: [String, Number, Boolean]
   },
   render() {
-    const { text, color } = this.options[this.value];
+    const { text, color } = this.state[this.value];
+    const arr = [];
+    if (this.style === 'none') {
+      arr.push(
+        h('i', {
+          style: {
+            background: color
+          }
+        })
+      );
+    }
+    arr.push(
+      h(
+        'span',
+        { style: { color } },
+        {
+          default: () => text
+        }
+      )
+    );
     return h(
       'p',
       {
         className: 'table-state'
       },
-      [
-        h('i', {
-          background: color
-        }),
-        h(
-          'span',
-          { style: { color } },
-          {
-            default: () => text
-          }
-        )
-      ]
+      arr
     );
   }
 });
@@ -141,7 +157,7 @@ export const TableTags = defineComponent({
   props: {
     value: [Array, Object],
     options: Object,
-    width: [String,Number]
+    width: [String, Number]
   },
   render() {
     const children = [];
@@ -211,27 +227,31 @@ export const TableBts = defineComponent({
     data: Object
   },
   render() {
-    return h(NSpace, {
-      style:{
-        justifyContent: 'center'
-      }
-    }, {
-      default: () =>
-        this.options.map((item) =>
-          h(
-            NButton,
-            {
-              onClick: () => {
-                item.hander(this.data);
+    return h(
+      NSpace,
+      {
+        style: {
+          justifyContent: 'center'
+        }
+      },
+      {
+        default: () =>
+          this.options.map((item) =>
+            h(
+              NButton,
+              {
+                onClick: () => {
+                  item.hander(this.data);
+                },
+                type: item.type,
+                size: 'small'
               },
-              type: item.type,
-              size: 'small'
-            },
-            {
-              default: () => item.title
-            }
+              {
+                default: () => item.title
+              }
+            )
           )
-        )
-    });
+      }
+    );
   }
 });

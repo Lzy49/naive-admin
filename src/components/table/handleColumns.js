@@ -1,6 +1,5 @@
-import { defineComponent, h, handleError } from 'vue';
+import { h } from 'vue';
 import { tableTypes } from './default';
-import { NAvatar, NPopover } from 'naive-ui';
 import {
   TableImage,
   TableEllipsis,
@@ -18,36 +17,22 @@ function handler({ type, key, options = {}, width, ...ags }) {
     render(data) {
       switch (type) {
         case 'img': {
-          return h(
-            TableImage,
-            {
-              src: data[key],
-              ...options
-            },
-            null
-          );
+          return h(TableImage, {
+            src: data[key]
+          });
         }
         case 'ellipsis': {
-          return h(
-            TableEllipsis,
-            {
-              text: data[key],
-              ...options
-            },
-            null
-          );
+          return h(TableEllipsis, {
+            text: data[key]
+          });
         }
         case 'link': {
-          return h(
-            TableLink,
-            {
-              href: data[key]
-            },
-            null
-          );
+          return h(TableLink, {
+            href: data[key]
+          });
         }
         case 'state': {
-          return h(TableState, { options, value: data[key] });
+          return h(TableState, { ...options, value: data[key] });
         }
         case 'tag': {
           return h(TableTags, { options, value: data[key], width });
@@ -65,13 +50,11 @@ function handler({ type, key, options = {}, width, ...ags }) {
     }
   };
 }
-export default (columns) => {
-  const newColumns = columns.map((item) => {
+export default (columns) =>
+  columns.map((item) => {
     const { type } = item;
     if (!type || !tableTypes.includes(type)) {
       return item;
     }
     return handler(item);
   });
-  return newColumns;
-};

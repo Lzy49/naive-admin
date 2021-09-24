@@ -91,7 +91,7 @@ const data = [
     ],
     other: '其他信息',
     address: '中国 上海 人民广场',
-    sex: '男'
+    sex: 'main'
   }
 ];
 const columns = [
@@ -128,20 +128,40 @@ const columns = [
     align: 'center',
     type: 'state',
     width: 100,
-    options: [
-      {
-        text: '未知',
-        color: 'gray'
-      },
-      {
-        text: '在职',
-        color: 'green'
-      },
-      {
-        text: '离职',
-        color: 'red'
+    options: {
+      state: [
+        {
+          text: '未知',
+          color: 'gray'
+        },
+        {
+          text: '在职',
+          color: 'green'
+        },
+        {
+          text: '离职',
+          color: 'red'
+        }
+      ]
+    }
+  },
+  {
+    title: '性别',
+    key: 'sex',
+    align: 'center',
+    type: 'state',
+    width: 100,
+    options: {
+      style: 'circle',
+      state: {
+        main: {
+          text: '男'
+        },
+        woman: {
+          text: '女'
+        }
       }
-    ]
+    }
   },
   {
     title: '标签',
@@ -159,10 +179,6 @@ const columns = [
       {
         title: '地址',
         key: 'address'
-      },
-      {
-        title: '性别',
-        key: 'sex'
       }
     ]
   },
