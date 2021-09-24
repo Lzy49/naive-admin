@@ -1,5 +1,5 @@
 <template>
-  <n-card :id="id" size="small" :title="props.title" :bordered="false">
+  <n-card :id="id" size="small" :title="props.title">
     <n-skeleton text v-if="loading || props.loading" :repeat="6" animated />
     <slot v-else></slot>
   </n-card>
