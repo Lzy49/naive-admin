@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/admin',
-    component: () => import('@/layouts/index.vue'),
+    component: () => import('@/layouts/adminWrap/index.vue'),
     redirect: '/admin/index',
     children: admin
   },

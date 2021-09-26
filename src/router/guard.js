@@ -3,6 +3,15 @@ import { PROJECTNAME } from '@/config';
 import storage from '@/utils/storage';
 import { isGuardRouter, isAdminRouter } from './export';
 export default (router) => {
+  router.beforeEach((to, from) => {
+    window.$loading.start();
+    // 登录鉴权
+    return storage.local.get('token')
+      ? true
+      : isGuardRouter(to.path)
+      ? '/login'
+      : true;
+  });
   router.afterEach((to, from, next) => {
     if (isAdminRouter(to.path)) {
       // 修改 侧边导航
@@ -12,13 +21,6 @@ export default (router) => {
       // 修改标题
       document.title = `${PROJECTNAME} - ${to.meta.title}`;
     }
-  });
-  router.beforeEach((to, from) => {
-    // 登录鉴权
-    return storage.local.get('token')
-      ? true
-      : isGuardRouter(to.path)
-      ? '/login'
-      : true;
+    window.$loading.finish();
   });
 };

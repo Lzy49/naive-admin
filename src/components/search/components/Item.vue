@@ -1,9 +1,13 @@
 <template>
-  <n-gi id="my-search-item" :span="span">
-    <n-form-item label-placement="left" :path="props.path" :label="props.label">
-      <slot></slot>
-    </n-form-item>
-  </n-gi>
+  <n-form-item-gi
+    id="my-search-item"
+    :span="span"
+    label-placement="left"
+    :path="props.path"
+    :label="props.label"
+  >
+    <slot></slot>
+  </n-form-item-gi>
 </template>
 <script setup>
 const props = defineProps({
@@ -19,10 +23,3 @@ export default {
   props: ['span']
 };
 </script>
-
-<style lang="scss">
-// 搜索 项 模块
-#my-search-item {
-  padding-right: 15px;
-}
-</style>
