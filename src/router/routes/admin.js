@@ -72,10 +72,17 @@ export default [
         }
       },
       {
+        path: 'configPage-complex',
+        component: () => import('@/pages/component/config-complex.vue'),
+        meta: {
+          title: '编辑页-复杂表单'
+        }
+      },
+      {
         path: 'configPage',
         component: () => import('@/pages/component/config.vue'),
         meta: {
-          title: '编辑页'
+          title: '编辑页-简单表单'
         }
       }
     ]

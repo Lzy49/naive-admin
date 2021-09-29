@@ -1,148 +1,113 @@
 <template>
-  <div id="form">
-    <n-card>
-      <n-form
-        :model="model"
-        :rules="rules"
-        ref="formRef"
-        label-placement="top"
-      >
-        <n-grid :cols="24" :x-gap="24">
-          <n-form-item-gi :span="8" label="Input" path="inputValue">
-            <n-input placeholder="Input" v-model:value="model.inputValue" />
-          </n-form-item-gi>
-          <n-form-item-gi :span="8" label="Textarea" path="textareaValue">
+  <div>
+    <FormWrap
+      v-model="model"
+      :rules="rules"
+      label-placement="left"
+      @onSubmit="handleValidateButtonClick"
+      :label-width="160"
+      title="简单表单"
+      subtitle="这是一个简单表单 案例"
+      :is-complex="false"
+    >
+      <FormItem label="Input" path="inputValue">
+        <n-input placeholder="Input" v-model:value="model.inputValue" />
+      </FormItem>
+      <FormItem label="Textarea" path="textareaValue">
+        <n-input
+          placeholder="Textarea"
+          v-model:value="model.textareaValue"
+          type="textarea"
+          :autosize="{
+            minRows: 3,
+            maxRows: 5
+          }"
+        />
+      </FormItem>
+      <FormItem label="Select" path="selectValue">
+        <n-select
+          placeholder="Select"
+          :options="generalOptions"
+          v-model:value="model.selectValue"
+        />
+      </FormItem>
+      <FormItem label="Multiple Select" path="multipleSelectValue">
+        <n-select
+          placeholder="Select"
+          :options="generalOptions"
+          v-model:value="model.multipleSelectValue"
+          multiple
+        />
+      </FormItem>
+      <FormItem label="Datetime" path="datetimeValue">
+        <n-date-picker type="datetime" v-model:value="model.datetimeValue" />
+      </FormItem>
+      <FormItem label="Switch" path="switchValue">
+        <n-switch v-model:value="model.switchValue" />
+      </FormItem>
+      <FormItem label="Checkbox Group" path="checkboxGroupValue">
+        <n-checkbox-group v-model:value="model.checkboxGroupValue">
+          <n-space>
+            <n-checkbox value="Option 1">Option 1</n-checkbox>
+            <n-checkbox value="Option 2">Option 2</n-checkbox>
+            <n-checkbox value="Option 3">Option 3</n-checkbox>
+          </n-space>
+        </n-checkbox-group>
+      </FormItem>
+      <FormItem label="Radio Group" path="radioGroupValue">
+        <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup1">
+          <n-space>
+            <n-radio value="Radio 1">Radio 1</n-radio>
+            <n-radio value="Radio 2">Radio 2</n-radio>
+            <n-radio value="Radio 3">Radio 3</n-radio>
+          </n-space>
+        </n-radio-group>
+      </FormItem>
+      <FormItem label="Radio Button Group" path="radioGroupValue">
+        <n-radio-group v-model:value="model.radioGroupValue" name="radiogroup2">
+          <n-radio-button value="Radio 1">Radio 1</n-radio-button>
+          <n-radio-button value="Radio 2">Radio 2</n-radio-button>
+          <n-radio-button value="Radio 3">Radio 3</n-radio-button>
+        </n-radio-group>
+      </FormItem>
+      <FormItem label="Input Number" path="inputNumberValue">
+        <n-input-number v-model:value="model.inputNumberValue" />
+      </FormItem>
+      <FormItem label="Time Picker" path="timePickerValue">
+        <n-time-picker v-model:value="model.timePickerValue" />
+      </FormItem>
+      <FormItem label="Slider" path="sliderValue">
+        <n-slider v-model:value="model.sliderValue" :step="5" />
+      </FormItem>
+      <FormItem label="Transfer" path="transferValue">
+        <n-transfer
+          v-model:value="model.transferValue"
+          :options="generalOptions"
+        />
+      </FormItem>
+      <FormItem label="Nested Path" :show-feedback="false">
+        <n-grid :cols="2" :x-gap="24">
+          <FormItem path="nestedValue.path1">
             <n-input
-              placeholder="Textarea"
-              v-model:value="model.textareaValue"
-              type="textarea"
-              :autosize="{
-                minRows: 3,
-                maxRows: 5
-              }"
-            />
-          </n-form-item-gi>
-          <n-form-item-gi :span="8" label="Select" path="selectValue">
-            <n-select
-              placeholder="Select"
-              :options="generalOptions"
-              v-model:value="model.selectValue"
-            />
-          </n-form-item-gi>
-          <n-form-item-gi
-            :span="8"
-            label="Multiple Select"
-            path="multipleSelectValue"
-          >
-            <n-select
-              placeholder="Select"
-              :options="generalOptions"
-              v-model:value="model.multipleSelectValue"
-              multiple
-            />
-          </n-form-item-gi>
-          <n-form-item-gi :span="8" label="Datetime" path="datetimeValue">
-            <n-date-picker
-              type="datetime"
-              v-model:value="model.datetimeValue"
-            />
-          </n-form-item-gi>
-          <n-form-item-gi :span="8" label="Switch" path="switchValue">
-            <n-switch v-model:value="model.switchValue" />
-          </n-form-item-gi>
-          <n-form-item-gi
-            :span="8"
-            label="Checkbox Group"
-            path="checkboxGroupValue"
-          >
-            <n-checkbox-group v-model:value="model.checkboxGroupValue">
-              <n-space>
-                <n-checkbox value="Option 1">Option 1</n-checkbox>
-                <n-checkbox value="Option 2">Option 2</n-checkbox>
-                <n-checkbox value="Option 3">Option 3</n-checkbox>
-              </n-space>
-            </n-checkbox-group>
-          </n-form-item-gi>
-          <n-form-item-gi :span="8" label="Radio Group" path="radioGroupValue">
-            <n-radio-group
-              v-model:value="model.radioGroupValue"
-              name="radiogroup1"
-            >
-              <n-space>
-                <n-radio value="Radio 1">Radio 1</n-radio>
-                <n-radio value="Radio 2">Radio 2</n-radio>
-                <n-radio value="Radio 3">Radio 3</n-radio>
-              </n-space>
-            </n-radio-group>
-          </n-form-item-gi>
-          <n-form-item-gi
-            :span="8"
-            label="Radio Button Group"
-            path="radioGroupValue"
-          >
-            <n-radio-group
-              v-model:value="model.radioGroupValue"
-              name="radiogroup2"
-            >
-              <n-radio-button value="Radio 1">Radio 1</n-radio-button>
-              <n-radio-button value="Radio 2">Radio 2</n-radio-button>
-              <n-radio-button value="Radio 3">Radio 3</n-radio-button>
-            </n-radio-group>
-          </n-form-item-gi>
-          <n-form-item-gi
-            :span="8"
-            label="Input Number"
-            path="inputNumberValue"
-          >
-            <n-input-number v-model:value="model.inputNumberValue" />
-          </n-form-item-gi>
-          <n-form-item-gi :span="8" label="Time Picker" path="timePickerValue">
-            <n-time-picker v-model:value="model.timePickerValue" />
-          </n-form-item-gi>
-          <n-form-item-gi :span="8" label="Slider" path="sliderValue">
-            <n-slider v-model:value="model.sliderValue" :step="5" />
-          </n-form-item-gi>
-          <n-form-item-gi :span="8" label="Transfer" path="transferValue">
-            <n-transfer
-              style="width: 100%"
-              v-model:value="model.transferValue"
-              :options="generalOptions"
-            />
-          </n-form-item-gi>
-          <n-form-item-gi
-            :span="4"
-            label="Nested Path"
-            path="nestedValue.path1"
-          >
-            <n-cascader
               placeholder="Nested Path 1"
               v-model:value="model.nestedValue.path1"
-              :options="cascaderOptions"
             />
-          </n-form-item-gi>
-          <n-form-item-gi :span="4" path="nestedValue.path2">
+          </FormItem>
+          <FormItem path="nestedValue.path2">
             <n-select
               placeholder="Nested Path 2"
               :options="generalOptions"
               v-model:value="model.nestedValue.path2"
             />
-          </n-form-item-gi>
+          </FormItem>
         </n-grid>
-      </n-form>
-    </n-card>
-    <n-card>
-      <n-space justify="end">
-        <n-button type="primary"> 提交 </n-button>
-        <n-button> 重置 </n-button>
-      </n-space>
-    </n-card>
+      </FormItem>
+    </FormWrap>
   </div>
 </template>
 <script setup>
 import { ref } from 'vue';
-const name = ref('');
-const current = ref(1);
-
+import { FormWrap, FormItem } from '@/components/form';
 const model = ref({
   inputValue: null,
   textareaValue: null,
@@ -150,8 +115,8 @@ const model = ref({
   multipleSelectValue: null,
   datetimeValue: null,
   nestedValue: {
-    path1: null,
-    path2: null
+    path1: '',
+    path2: ''
   },
   switchValue: false,
   checkboxGroupValue: null,
@@ -250,17 +215,15 @@ const rules = {
     message: '请输入 transferValue'
   }
 };
-</script>
-<style lang="scss">
-#form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-self: start;
-  height: 100%;
-  box-sizing: border-box;
-  > div:first-child {
-    flex: 1;
-  }
+function handleValidateButtonClick(e) {
+  e.preventDefault();
+  formRef.value.validate((errors) => {
+    if (!errors) {
+      message.success('验证成功');
+    } else {
+      console.log(errors);
+      message.error('验证失败');
+    }
+  });
 }
-</style>
+</script>

@@ -1,8 +1,8 @@
 <template>
   <n-form
     id="my-search-box"
-    :model="props.data"
-    :rules="props.rule"
+    :model="props.modelValue"
+    :rules="props.rules"
     ref="formRef"
   >
     <n-grid
@@ -46,17 +46,17 @@ const props = defineProps({
     default: 1
   },
   modelValue: Object,
-  rule: Object
+  rules: Object
 });
 
-const $emit = defineEmits(['on-search', 'update:modelValue']);
+const emit = defineEmits(['on-search', 'update:modelValue']);
 // 点击确定后验证数据
 const formRef = ref(null);
 const message = useMessage();
 const onSearch = () => {
   formRef.value.validate((errors) => {
     if (!errors) {
-      $emit('on-search');
+      emit('on-search');
     } else {
       message.error('请按要求填写搜索项');
     }
@@ -67,7 +67,7 @@ const onSearch = () => {
 const data = copy(props.modelValue);
 const onReset = () => {
   // 重置数据
-  $emit('update:modelValue', copy(data));
+  emit('update:modelValue', copy(data));
   formRef.value.restoreValidation();
 };
 /*收缩 搜索项*/
