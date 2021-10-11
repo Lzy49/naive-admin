@@ -1,31 +1,60 @@
 <template>
   <div id="my-table-box">
     <n-data-table
-      v-bind="attrs"
       style="height: 100%"
       flex-height
       :columns="columns"
       :data="props.data"
+      :loading="!props.data"
+      :remote="true"
       :pagination="{
         ...defaultPagination,
-        ...props.pagination
+        ...props.pagination,
+        ...pageInfo,
       }"
+      v-model:page="page"
+      v-model:page-size="pageSize"
+      @update:page="onPage"
+      @update:page-size="onPageSize"
+      v-bind="$attrs"
     >
     </n-data-table>
   </div>
 </template>
 <script setup>
-import { useAttrs } from 'vue';
+import { reactive } from 'vue';
 import { defaultPagination } from './default.js';
 import handleColumns from './handleColumns.js';
-const attrs = useAttrs();
 const props = defineProps({
   data: Array,
   columns: Array,
   pagination: Object
 });
-
+const emits = defineEmits(['update']);
 const columns = handleColumns(props.columns);
+const pageInfo = reactive({
+  page: 1,
+  pageSize: 1
+});
+const onPage = (page) => {
+  pageInfo.page = Number(page);
+  emits('update', pageInfo);
+};
+const onPageSize = (size) => {
+  pageInfo.page = 1;
+  pageInfo.pageSize = size;
+  emits('update', pageInfo);
+};
+const init = () => {
+  pageInfo.page = props.pagination.page || 1;
+  pageInfo.pageSize =
+    props.pagination.pageSize || defaultPagination.pageSizes[0];
+  emits('update', pageInfo);
+};
+init();
+defineExpose({
+  init
+});
 </script>
 <script>
 export default {
