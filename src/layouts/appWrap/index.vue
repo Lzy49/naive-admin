@@ -10,10 +10,13 @@
         :locale="zhCN"
         :date-locale="dateZhCN"
       >
-        <!-- 一些JavaScript配置 -->
-        <ConfigWarp>
-          <slot></slot>
-        </ConfigWarp>
+        <!-- 配置 dialog-provider -->
+        <n-dialog-provider>
+          <!-- 一些JavaScript配置 -->
+          <ConfigWarp>
+            <slot></slot>
+          </ConfigWarp>
+        </n-dialog-provider>
       </n-config-provider>
     </n-message-provider>
   </n-loading-bar-provider>

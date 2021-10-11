@@ -19,4 +19,7 @@ window.$message = useMessage();
 // 挂载一个 进度条
 import { useLoadingBar } from 'naive-ui';
 window.$loading = useLoadingBar();
+// 挂载一个 对话框 Dialog
+import { useDialog } from 'naive-ui';
+window.$dialog = useDialog();
 </script>
