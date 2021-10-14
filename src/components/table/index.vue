@@ -93,6 +93,7 @@ export default {
   }
 
   .table-state {
+    margin: 0;
     i {
       display: inline-block;
       width: 10px;
