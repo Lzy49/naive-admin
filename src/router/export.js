@@ -1,6 +1,6 @@
 // 该文件中存放的是 通过 routes 处理出的 提供给组件的 各种对象
 import { ROOTPATH, GUARDPATHS, ADMINPATHS } from './constant';
-import adminRoutes from './routes/admin';
+import { routes as adminRoutes } from './routes/admin';
 // 拼装 所有节点 和 所有关系
 const flatRoutes = (routes, parent = null) => {
   return routes.map(({ path, meta, noSearch, noNav, children }) => {
@@ -50,9 +50,9 @@ export const pathToCanNavPath = (path) => {
 // 通过 item 返回 它 和 它 所有父级
 const getParentList = (item) => {
   return [
-    item,
-    ...(item.parent && item.parent.label ? getParentList(item.parent) : [])
-  ].reverse();
+    ...(item.parent && item.parent.label ? getParentList(item.parent) : []),
+    item
+  ];
 };
 // 通过 路由 找 面包屑
 export const pathToBreadcrumb = (path) => {

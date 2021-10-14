@@ -1,6 +1,7 @@
 <template>
   <n-breadcrumb style="padding: var(--appPadding)">
     <n-breadcrumb-item v-for="item of $store.state.system.breadcrumb">
+      <!-- 
       <n-dropdown
         v-if="item.children"
         placement="bottom-start"
@@ -10,10 +11,11 @@
         @select="(res) => $router.push(res)"
       >
         {{ item.label }}
-      </n-dropdown>
-      <template v-else @click="$router.push(item.value)">
+         -->
+      <router-link :to="item.value">
         {{ item.label }}
-      </template>
+      </router-link>
     </n-breadcrumb-item>
   </n-breadcrumb>
 </template>
+<script></script>
