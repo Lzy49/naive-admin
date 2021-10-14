@@ -12,9 +12,9 @@
       >
         {{ item.label }}
          -->
-      <router-link :to="item.value">
+      <span @click="$router.push(item.value)">
         {{ item.label }}
-      </router-link>
+      </span>
     </n-breadcrumb-item>
   </n-breadcrumb>
 </template>
