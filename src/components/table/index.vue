@@ -10,10 +10,10 @@
       :pagination="{
         ...defaultPagination,
         ...props.pagination,
-        ...pageInfo,
+        ...pageInfo
       }"
-      v-model:page="page"
-      v-model:page-size="pageSize"
+      v-model:page="pageInfo.page"
+      v-model:page-size="pageInfo.pageSize"
       @update:page="onPage"
       @update:page-size="onPageSize"
       v-bind="$attrs"
@@ -30,7 +30,7 @@ const props = defineProps({
   columns: Array,
   pagination: Object
 });
-const emits = defineEmits(['update']);
+const emits = defineEmits(['update', 'update:data']);
 const columns = handleColumns(props.columns);
 const pageInfo = reactive({
   page: 1,
@@ -46,6 +46,7 @@ const onPageSize = (size) => {
   emits('update', pageInfo);
 };
 const init = () => {
+  emits('update:data', undefined);
   pageInfo.page = props.pagination.page || 1;
   pageInfo.pageSize =
     props.pagination.pageSize || defaultPagination.pageSizes[0];
