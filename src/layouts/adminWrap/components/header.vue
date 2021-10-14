@@ -62,6 +62,7 @@ import { Search, Moon, Sunny, ClipboardOutline } from '@vicons/ionicons5';
 import { ref, computed, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 import storage from '@/utils/storage.js';
+import loginOut from '@/utils/loginOut';
 const router = useRouter();
 // 搜索框相关
 const inputInstRef = ref(null);
@@ -97,8 +98,7 @@ const userOptions = [
 ];
 const menuhander = (key) => {
   if (key === 'logout') {
-    storage.local.remove('token');
-    router.replace('/login');
+    loginOut();
   } else {
     router.replace('/admin/user');
   }
