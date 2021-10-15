@@ -6,7 +6,7 @@ const flatRoutes = (routes, parent = null) => {
   return routes.map(({ path, meta, noSearch, noNav, children }) => {
     const { icon, title } = meta;
     const item = {
-      value: parent.value + '/' + path, // path
+      value: path.startsWith('/') ? path : parent.value + '/' + path, // path
       label: title, // title
       icon: icon, // ico
       noSearch, // 该路由不进行搜索
