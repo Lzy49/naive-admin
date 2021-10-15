@@ -7,7 +7,7 @@
   >
     <n-grid
       :collapsed="gridCollapsed"
-      :collapsed-rows="props.rows"
+      :collapsed-rows="Number(props.rows)"
       cols="2 s:3 m:4 l:5 xl:6 2xl:7"
       :x-gap="15"
       responsive="screen"
@@ -41,22 +41,19 @@ import { onMounted, ref, useSlots, watchEffect } from 'vue';
 import { ChevronUpSharp, ChevronDownSharp } from '@vicons/ionicons5';
 import { useMessage } from 'naive-ui';
 const props = defineProps({
-  rows: {
-    type: Number,
-    default: 1
-  },
+  rows: [String, Number],
   modelValue: Object,
   rules: Object
 });
 
-const emit = defineEmits(['on-search', 'update:modelValue']);
+const emit = defineEmits(['search', 'reset', 'update:modelValue']);
 // 点击确定后验证数据
 const formRef = ref(null);
 const message = useMessage();
 const onSearch = () => {
   formRef.value.validate((errors) => {
     if (!errors) {
-      emit('on-search');
+      emit('search');
     } else {
       message.error('请按要求填写搜索项');
     }
@@ -68,6 +65,7 @@ const data = copy(props.modelValue);
 const onReset = () => {
   // 重置数据
   emit('update:modelValue', copy(data));
+  emit('reset');
   formRef.value.restoreValidation();
 };
 /*收缩 搜索项*/
