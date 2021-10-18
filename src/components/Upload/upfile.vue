@@ -143,7 +143,7 @@ const beforeUpload = ({ file }) => {
 // 上传后
 const finish = ({ event, file }) => {
   const res = JSON.parse(event.target.response);
-  if (res.status === 0) {
+  if (res.state === 0) {
     emits('update:fileList', [...fileList.value, res.data]);
   } else {
     window.$message.error(res.msg);

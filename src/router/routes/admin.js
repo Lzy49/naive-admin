@@ -80,8 +80,16 @@ export const routes = [
         meta: {
           title: '编辑页-简单表单'
         }
+      },
+      {
+        path: 'upfilePage',
+        component: () => import('@/pages/component/upfile-dome.vue'),
+        meta: {
+          title: '上传文件'
+        }
       }
     ]
   }
 ];
-export default routesHander(routes);
+console.log(routesHander(routes, ROOTPATH));
+export default routesHander(routes, ROOTPATH);
