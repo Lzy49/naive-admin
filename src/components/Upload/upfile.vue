@@ -232,9 +232,12 @@ const finish = ({ event, file }) => {
         justify-content: center;
         cursor: pointer;
         .up-file-content {
+          width: 88px;
+          height: 88px;
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-direction: column;
         }
       }
     }
