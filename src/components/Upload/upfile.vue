@@ -14,22 +14,34 @@
         </div>
         <div
           v-if="fileList.length < props.itemCount"
-          class="item"
+          class="item up-bt"
           :style="itemStyle"
         >
           <n-upload
+            v-show="!loading"
             :action="props.action"
             :file-list-style="{ display: 'none' }"
             :multiple="true"
             :headers="uploadCofing.headers"
             @before-upload="beforeUpload"
             @finish="finish"
-            class="up-bt"
+            @change="change"
           >
-            <slot>
-              <n-icon size="38" :depth="3"><CloudUpload /></n-icon>
-            </slot>
+            <div :style="itemStyle" class="up-file-content">
+              <slot>
+                <n-icon size="38" :depth="3"><CloudUpload /></n-icon>
+              </slot>
+            </div>
           </n-upload>
+          <!-- :color="themeVars.successColor" -->
+          <!-- :rail-color="changeColor(themeVars.successColor, { alpha: 0.2 })"
+            :indicator-text-color="themeVars.successColor" -->
+          <n-progress
+            v-show="loading"
+            type="circle"
+            :color="store.state.system.theme.common.primaryColor"
+            :percentage="percentage"
+          />
         </div>
       </n-space>
     </div>
@@ -58,10 +70,9 @@
 import { uploadCofing, fileTypeOf } from './config';
 import { CloudUpload, EyeOutline } from '@vicons/ionicons5';
 import { DeleteOutlined } from '@vicons/antd';
-import { ref, computed, toRef } from 'vue';
+import { ref, computed, toRef, nextTick } from 'vue';
 import { useThemeVars } from 'naive-ui';
 import { useStore } from 'vuex';
-
 const props = defineProps({
   itemStyle: Object, // item 样式
   itemCount: {
@@ -82,7 +93,7 @@ const props = defineProps({
   itemMaxSize: {
     // 文件最大值（单位M）
     type: Number,
-    default: 10
+    default: 1024
   },
   itemTypes: {
     // 文件类型限制
@@ -90,7 +101,7 @@ const props = defineProps({
     default: ['jpeg', 'png', 'jpg']
   }
 });
-const emits = defineEmits('beforeUpload', 'update:fileList');
+const emits = defineEmits(['beforeUpload', 'update:fileList']);
 const fileList = toRef(props, 'fileList');
 // 样式
 const store = useStore();
@@ -115,6 +126,9 @@ function del(index) {
     ...fileList.value.slice(index + 1, fileList.value.length - 1)
   ]);
 }
+// 上传
+const loading = ref(false);
+const percentage = ref(0);
 // 上传前
 const beforeUpload = ({ file }) => {
   const fileInfo = file.file;
@@ -138,19 +152,31 @@ const beforeUpload = ({ file }) => {
   if (typeof emits('beforeUpload', file) === 'boolean') {
     return emits('beforeUpload', file);
   }
+  loading.value = true;
+  return true;
+};
+// 上传中
+const change = (res) => {
+  const { file } = res;
+  percentage.value = file.percentage - 1;
   return true;
 };
 // 上传后
 const finish = ({ event, file }) => {
+  loading.value = false;
   const res = JSON.parse(event.target.response);
-  if (res.state === 0) {
+  if (res.status === 0) {
     emits('update:fileList', [...fileList.value, res.data]);
   } else {
     window.$message.error(res.msg);
   }
+
+  nextTick().then(() => {
+    percentage.value = 0;
+  });
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 #upImg {
   width: 100%;
   .list {
@@ -198,13 +224,18 @@ const finish = ({ event, file }) => {
         height: 100%;
       }
       // 上传按钮
-      .up-bt {
+      &.up-bt {
         display: flex;
         width: 100%;
         height: 100%;
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        .up-file-content {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       }
     }
   }
