@@ -2,7 +2,10 @@ import { defineComponent, h } from 'vue';
 import { NEllipsis } from 'naive-ui';
 export default defineComponent({
   props: {
-    text: String
+    text: {
+      type: [String, Number],
+      default: ''
+    }
   },
   render() {
     return h(

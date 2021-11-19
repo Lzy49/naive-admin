@@ -23,7 +23,7 @@ export default defineComponent({
   render() {
     const { text, color } = this.state[this.value];
     const arr = [];
-    if (this.style === 'none') {
+    if (this.style !== 'none') {
       arr.push(
         h('i', {
           style: {
