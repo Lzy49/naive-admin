@@ -15,6 +15,16 @@ export default defineComponent({
         ...this.$attrs
       },
       {
+        tooltip: () =>
+          h(
+            'div',
+            {
+              style: {
+                maxWidth: '400px'
+              }
+            },
+            this.text
+          ),
         default: () => this.text
       }
     );
