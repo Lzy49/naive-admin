@@ -45,7 +45,7 @@ const props = defineProps({
     default: true
   }
 });
-const emit = defineEmits(['update:modelValue', 'on-submit']);
+const emit = defineEmits(['update:modelValue', 'on-submit', 'reset']);
 // 对组件的一些初始化配置
 provide('isComplex', props.isComplex);
 // 组件初始化 -- 原始数据
@@ -61,6 +61,7 @@ const reset = () => {
       ...copy(restDate)
     })
   );
+  emit('reset');
 };
 // 验证数据并提交
 const submit = () => {
@@ -68,10 +69,14 @@ const submit = () => {
     if (!errors) {
       emit('on-submit');
     } else {
-      window.$message.error('Invalid');
+      window.$message.error('请完整填写表单');
     }
   });
 };
+
+defineExpose({
+  reset
+});
 </script>
 <style lang="scss">
 #my-form-warp {
